@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>boAt Rockerz Plus 550 — Voice Guide</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #0b0b0c;
+        background-image:
+          radial-gradient(
+            circle at 50% 25%,
+            rgba(212, 175, 95, 0.08),
+            transparent 60%
+          ),
+          linear-gradient(rgba(11, 11, 12, 0.88), rgba(11, 11, 12, 0.94)),
+          url("/product.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+      .container {
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      .emblem {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid #d4b062;
+        color: #d4b062;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.35;
+        margin-bottom: 28px;
+        color: #f5f5f5;
+      }
+      form {
+        text-align: left;
+      }
+      .field {
+        margin-bottom: 18px;
+      }
+      label {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: #9ca3af;
+        margin-bottom: 7px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      input {
+        width: 100%;
+        background: rgba(34, 35, 38, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 13px 15px;
+        font-size: 15px;
+        color: #ffffff;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      input::placeholder {
+        color: #6b7280;
+      }
+      input:focus {
+        border-color: #d4b062;
+      }
+      .btn {
+        width: 100%;
+        margin-top: 10px;
+        padding: 14px;
+        border: none;
+        border-radius: 999px;
+        background: #d4b062;
+        color: #111111;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.1s;
+      }
+      .btn:hover {
+        opacity: 0.92;
+      }
+      .btn:active {
+        transform: scale(0.99);
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .toggle-link {
+        display: inline-block;
+        margin-top: 22px;
+        font-size: 13px;
+        color: #9ca3af;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .toggle-link:hover {
+        color: #ffffff;
+      }
+      .error-msg {
+        color: #f87171;
+        font-size: 13px;
+        margin-top: 14px;
+        text-align: center;
+        min-height: 20px;
+        line-height: 1.4;
+      }
+      .error-msg a {
+        color: #d4b062;
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="emblem">boAt</div>
+
+      <!-- SIGN UP VIEW -->
+      <div id="signup-view">
+        <h1>Sign up to talk with the boAt Rockerz Plus 550 voice guide</h1>
+        <form id="signup-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Jane Doe" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="jane@company.com"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="+91 98765 43210"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="company">Company Name</label>
+            <input
+              id="company"
+              type="text"
+              placeholder="Acme Inc. (Optional)"
+            />
+          </div>
+          <button class="btn" type="submit" id="signup-btn">Sign up</button>
+        </form>
+        <button class="toggle-link" id="to-login">
+          Already registered? Log in
+        </button>
+      </div>
+
+      <!-- LOG IN VIEW (Email + Phone Number check against Neon DB) -->
+      <div id="login-view" class="hidden">
+        <h1>Log in to continue</h1>
+        <form id="login-form">
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input
+              id="login-email"
+              type="email"
+              placeholder="jane@company.com"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="login-phone">Phone Number</label>
+            <input
+              id="login-phone"
+              type="tel"
+              placeholder="+91 98765 43210"
+              required
+            />
+          </div>
+          <button class="btn" type="submit" id="login-btn">Log in</button>
+        </form>
+        <button class="toggle-link" id="to-signup">New here? Sign up</button>
+      </div>
+
+      <div class="error-msg" id="error-msg"></div>
+    </div>
+
+    <script>
+      const signupView = document.getElementById("signup-view");
+      const loginView = document.getElementById("login-view");
+      const errorMsg = document.getElementById("error-msg");
+
+      function showLogin() {
+        errorMsg.innerHTML = "";
+        signupView.classList.add("hidden");
+        loginView.classList.remove("hidden");
+      }
+
+      function showSignup(prefillEmail = "", prefillPhone = "") {
+        errorMsg.innerHTML = "";
+        if (prefillEmail) document.getElementById("email").value = prefillEmail;
+        if (prefillPhone) document.getElementById("phone").value = prefillPhone;
+        loginView.classList.add("hidden");
+        signupView.classList.remove("hidden");
+      }
+
+      document.getElementById("to-login").addEventListener("click", showLogin);
+      document
+        .getElementById("to-signup")
+        .addEventListener("click", () => showSignup());
+
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errorMsg.innerHTML = "";
+          const btn = document.getElementById("signup-btn");
+          btn.disabled = true;
+
+          try {
+            const res = await fetch("/api/signup", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                company: document.getElementById("company").value,
+              }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Sign up failed");
+            window.location.href = "/showcase";
+          } catch (err) {
+            errorMsg.textContent = err.message;
+            btn.disabled = false;
+          }
+        });
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errorMsg.innerHTML = "";
+          const btn = document.getElementById("login-btn");
+          btn.disabled = true;
+
+          const emailVal = document.getElementById("login-email").value;
+          const phoneVal = document.getElementById("login-phone").value;
+
+          try {
+            const res = await fetch("/api/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: emailVal, phone: phoneVal }),
+            });
+            const data = await res.json();
+
+            if (!res.ok) {
+              if (data.needsSignup) {
+                errorMsg.innerHTML = `No account found with that email and phone number. <a id="inline-signup">Sign up now</a>`;
+                document
+                  .getElementById("inline-signup")
+                  .addEventListener("click", () => {
+                    showSignup(emailVal, phoneVal);
+                  });
+              } else {
+                errorMsg.textContent = data.error || "Login failed";
+              }
+              btn.disabled = false;
+              return;
+            }
+
+            window.location.href = "/showcase";
+          } catch (err) {
+            errorMsg.textContent = err.message;
+            btn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>

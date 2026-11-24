@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>boAt Rockerz Plus 550</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #08080a;
+        color: #ffffff;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .product-stage {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, #1b1c20 0%, #070709 75%);
+      }
+      .product-stage img {
+        width: 100%;
+        height: 100%;
+        max-width: 900px;
+        object-fit: contain;
+        padding: 24px;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+      /* Top-left product header */
+      .top-brand {
+        position: absolute;
+        top: 20px;
+        left: 22px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+      }
+      .brand-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1.5px solid #d4b062;
+        color: #d4b062;
+        font-size: 10px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .model-label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #d1d5db;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      /* Top-right Logout button */
+      .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 22px;
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 15px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(15, 15, 18, 0.65);
+        backdrop-filter: blur(8px);
+        color: #d1d5db;
+        font-size: 11px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s,
+          background 0.2s;
+      }
+      .logout-btn:hover {
+        border-color: #d4b062;
+        color: #ffffff;
+        background: rgba(212, 176, 98, 0.12);
+      }
+      /* Bottom-center mic toggle control */
+      .mic-dock {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+      }
+      .mic-ring {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(15, 15, 18, 0.65);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .mic-ring:hover {
+        border-color: #d4b062;
+        transform: scale(1.04);
+      }
+      .mic-ring:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      .mic-core {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease;
+      }
+      .mic-ring.active {
+        border-color: #d4b062;
+        animation: pulseRing 1.6s infinite;
+      }
+      .mic-ring.active .mic-core {
+        background: #d4b062;
+        color: #0b0b0c;
+      }
+      .mic-caption {
+        font-size: 10px;
+        letter-spacing: 2.2px;
+        text-transform: uppercase;
+        color: #9ca3af;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        white-space: nowrap;
+      }
+      .mic-ring.active + .mic-caption {
+        color: #d4b062;
+      }
+      @keyframes pulseRing {
+        0% {
+          box-shadow: 0 0 0 0 rgba(212, 176, 98, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 18px rgba(212, 176, 98, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(212, 176, 98, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top-left Product Badge -->
+    <div class="top-brand">
+      <div class="brand-circle">boAt</div>
+      <span class="model-label">BOAT ROCKERZ PLUS 550</span>
+    </div>
+
+    <!-- Top-right Logout Button -->
+    <button class="logout-btn" id="logout-btn" title="Log out">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
+      </svg>
+      <span>Log out</span>
+    </button>
+
+    <!-- Full-screen Product Visual -->
+    <div class="product-stage">
+      <img src="/product.jpg" alt="boAt Rockerz Plus 550" />
+    </div>
+
+    <!-- Bottom-center Mic ON / OFF Toggle -->
+    <div class="mic-dock">
+      <button
+        class="mic-ring"
+        id="mic-btn"
+        aria-label="Toggle Microphone"
+        aria-pressed="false"
+      >
+        <div class="mic-core" id="mic-icon-container">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" x2="12" y1="19" y2="22" />
+          </svg>
+        </div>
+      </button>
+      <span class="mic-caption" id="mic-caption">TAP MIC TO START</span>
+    </div>
+
+    <script type="module">
+      import { Conversation } from "https://esm.sh/@elevenlabs/client";
+
+      const AGENT_ID = "__ELEVENLABS_AGENT_ID__";
+      const micBtn = document.getElementById("mic-btn");
+      const micCaption = document.getElementById("mic-caption");
+      const micIconContainer = document.getElementById("mic-icon-container");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      let conversation = null;
+
+      const micOnSvg = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" x2="12" y1="19" y2="22"/>
+      </svg>`;
+
+      const micStopSvg = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <rect x="5" y="5" width="14" height="14" rx="2"/>
+      </svg>`;
+
+      function updateMicUI(state, customText) {
+        const isActive = state === "active";
+        micBtn.disabled = state === "connecting";
+        micBtn.classList.toggle("active", isActive);
+        micBtn.setAttribute("aria-pressed", String(isActive));
+        micIconContainer.innerHTML = isActive ? micStopSvg : micOnSvg;
+        micCaption.textContent =
+          customText ||
+          (isActive ? "MIC ON — TAP TO STOP" : "TAP MIC TO START");
+      }
+
+      micBtn.addEventListener("click", async () => {
+        // If already connected, end the voice session
+        if (conversation) {
+          await conversation.endSession();
+          conversation = null;
+          updateMicUI("idle");
+          return;
+        }
+
+        if (!AGENT_ID || AGENT_ID === "__ELEVENLABS_AGENT_ID__") {
+          updateMicUI("idle", "MISSING AGENT ID IN .ENV");
+          return;
+        }
+
+        try {
+          updateMicUI("connecting", "CONNECTING...");
+          // Request browser microphone access first
+          await navigator.mediaDevices.getUserMedia({ audio: true });
+
+          conversation = await Conversation.startSession({
+            agentId: AGENT_ID,
+            onConnect: () => {
+              updateMicUI("active", "MIC ON — TAP TO STOP");
+            },
+            onDisconnect: () => {
+              conversation = null;
+              updateMicUI("idle", "TAP MIC TO START");
+            },
+            onModeChange: (mode) => {
+              if (conversation) {
+                updateMicUI(
+                  "active",
+                  mode.mode === "speaking"
+                    ? "AGENT SPEAKING — TAP TO STOP"
+                    : "LISTENING — TAP TO STOP",
+                );
+              }
+            },
+            onError: (err) => {
+              console.error("ElevenLabs Voice Error:", err);
+              conversation = null;
+              updateMicUI("idle", "CONNECTION ERROR — RETRY");
+            },
+          });
+        } catch (err) {
+          console.error("Microphone / Session error:", err);
+          conversation = null;
+          updateMicUI("idle", "ALLOW MIC & TAP TO RETRY");
+        }
+      });
+
+      logoutBtn.addEventListener("click", async () => {
+        if (conversation) {
+          await conversation.endSession();
+          conversation = null;
+        }
+        await fetch("/api/logout", { method: "POST" });
+        window.location.href = "/";
+      });
+    </script>
+  </body>
+</html>
